@@ -10,7 +10,7 @@ import logging
 # create a file handler for saving logs
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
-handler = logging.FileHandler('hello.log')
+handler = logging.FileHandler('events.log')
 handler.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 handler.setFormatter(formatter)
@@ -24,6 +24,7 @@ keyboardd = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text='س
 #define the array that use many time in this app
 arr=["سنگ","کاغذ","قیچی"]
 wait_for_opp = {}
+
 #define the RPS game law
 def game_result(first,last):
     if first == "1":
@@ -31,10 +32,6 @@ def game_result(first,last):
             return -1
         elif last == "3":
             return 1
-        elif last=="4":
-            return 1
-        elif last=="5":
-            return -1
         else:
             return 0
     if first == "2":
@@ -42,10 +39,6 @@ def game_result(first,last):
             return 1
         elif last == "3":
             return -1
-        elif last=="4":
-            return -1
-        elif last=="5":
-            return 1
         else:
             return 0
     if first == "3":
@@ -53,10 +46,6 @@ def game_result(first,last):
             return -1
         elif last == "2":
             return 1
-        elif last=="4":
-            return 1
-        elif last=="5":
-            return -1
         else:
             return 0
 
@@ -72,9 +61,9 @@ class db_player:
     player_db = {}
     def __init__(self):
         conn = mysql.connector.connect(host='localhost',
-                                       database='mahdidav_123',
-                                       user='mahdidav_123',
-                                       password='neymar1107')
+                                       database='DataBase',
+                                       user='DataBase',
+                                       password='DataBase-Password ')
         cur = conn.cursor()
         cur.execute("SELECT * FROM players")
         row = cur.fetchall()
@@ -206,9 +195,9 @@ class battle:
                                                                    KeyboardButton(text=menu_array[6])]],
                                                         resize_keyboard=True))
         conn = mysql.connector.connect(host='localhost',
-                                       database='mahdidav_123',
-                                       user='mahdidav_123',
-                                       password='neymar1107')
+                                       database='DataBase',
+                                       user='DataBase',
+                                       password='DataBase-Password ')
         cur = conn.cursor()
         try:
             cur.execute("""UPDATE players SET score=%s WHERE chat_id=%s""", (int(self.p1.score + self.score1 - self.score2),str(self.p1.chat__id)))
@@ -234,9 +223,9 @@ class battle:
             del (wait_for_opp[int(self.p2.chat__id)])
 
         conn = mysql.connector.connect(host='localhost',
-                                       database='mahdidav_123',
-                                       user='mahdidav_123',
-                                       password='neymar1107')
+                                       database='DataBase',
+                                       user='DataBase',
+                                       password='DataBase-Password ')
         cur = conn.cursor()
         cur.execute("""UPDATE players SET score=%s WHERE chat_id=%s""", (int(self.p1.score + self.score1 - self.score2), str(self.p1.chat__id)))
         cur.execute("""UPDATE players SET score=%s WHERE chat_id=%s""", (int(self.p2.score + self.score2 - self.score1), str(self.p2.chat__id)))
@@ -555,9 +544,9 @@ def handle(msg):
                         logger.info("write " + str(chat_id) + ' to the database .')
                         try:
                             conn = mysql.connector.connect(host='localhost',
-                                                           database='mahdidav_123',
-                                                           user='mahdidav_123',
-                                                           password='neymar1107')
+                                                           database='DataBase',
+                                                           user='DataBase',
+                                                           password='DataBase-Password ')
                             cur = conn.cursor()
                             cur.execute("""INSERT INTO players(chat_id, username, score) VALUES(%s,%s,%s)""",((str(chat_id)),username,0))
                             conn.commit()
@@ -625,9 +614,9 @@ def handle(msg):
                                             delete_array.append(key)
                                     for key in delete_array:
                                         conn = mysql.connector.connect(host='localhost',
-                                                                       database='mahdidav_123',
-                                                                       user='mahdidav_123',
-                                                                       password='neymar1107')
+                                                                       database='DataBase',
+                                                                       user='DataBase',
+                                                                       password='DataBase-Password ')
                                         cur = conn.cursor()
                                         cur.execute("DELETE FROM players WHERE chat_id=%s", (str(key),))
                                         conn.commit()
