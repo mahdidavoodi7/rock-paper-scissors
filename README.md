@@ -65,9 +65,10 @@ def game_result(first,last):
             return 0
 ```
 ## DataBase
-you must have a mysql database and a username and a ** table named players **
+you must have a mysql database and a username and a 
+**table named players**
 
-here is an example use of database 
+here is an example for using database 
 ```python
 conn = mysql.connector.connect(host='localhost',
                                        database='DataBase',
