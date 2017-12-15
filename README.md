@@ -8,6 +8,7 @@ Wanna play Rock Paper scissors online and challenge yourself ? WELCOME this is y
 
 3- I recommend you to use PyCharm as a IDE .
 
+4- Also you need a server and mysql on it to run this code you can do it offline with WampServer ->
 
 ## Code 
 ### Libraries
@@ -63,4 +64,23 @@ def game_result(first,last):
         else:
             return 0
 ```
+## DataBase
+you must have a mysql database and a username and a ** table named players **
+
+here is an example use of database 
+```python
+conn = mysql.connector.connect(host='localhost',
+                                       database='DataBase',
+                                       user='DataBase',
+                                       password='DataBase-Password ')
+cur = conn.cursor()
+cur.execute("SELECT * FROM players")
+row = cur.fetchall()
+cur.close()
+conn.close()
+```	
+#### Table : 
+Your Table must has this columns : 
+					   
+id   -    name     -     chat_id     -      score 
 
